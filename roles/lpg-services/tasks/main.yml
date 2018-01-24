@@ -1,0 +1,13 @@
+---
+- name: Docker run lpg-ui
+  docker_container:
+    name: lpg-ui
+    hostname: lpg-ui
+    image: cshr/lpg-ui:{{ lpgui }}
+    state: started
+    recreate: no
+  tags: lpg-ui
+
+
+
+

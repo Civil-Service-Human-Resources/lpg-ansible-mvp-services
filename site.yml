@@ -1,0 +1,10 @@
+---
+#run containers on host app-01
+- hosts: mvp[1]
+  become: true
+  gather_facts: false
+  roles:
+    - lpg-services
+
+
+
