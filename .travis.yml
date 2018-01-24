@@ -2,15 +2,13 @@ sudo: required
 dist: trusty
 language: python
 python: '2.7'
-
 install:
 - pip install ansible
-
 script:
+- echo $vaultPassword > vault.yml
 - cat ssh_$TRAVIS_BRANCH.conf >> ~/.ssh/config
 - ansible-vault decrypt mvp_test
 - ansible-playbook site.yml -i environments/$TRAVIS_BRANCH -vvv
-
 addons:
   ssh_known_hosts:
   - prod-lpg.uksouth.cloudapp.azure.com
@@ -18,3 +16,6 @@ addons:
   - 10.0.10.4
   - 10.0.11.4
   - 10.0.12.4
+env:
+  global:
+    secure: D9kaANCJR+4iUK7V/BenLh5C7laz/3lpaUAZfKy6YWf7j4bw4rvtL2cnpNpJmumvfdQcctlbhwuGj163mmNH1IZCmzxUj97TVCp4GTcEiwx+syMlNjGyxJ9gI3y9LuZMeUqeS+1QA7VQDuRufiIdN9c+pPC8EE4WJLI/LF3uMDp6IC2uHTQJoIZ24DjCRvXEPM5jUq8m71paWVTvReTRybZnjaNZs7i9Yy/xJuLqiS2U8hPaPvzY/Z6qQB/IYhABPVnIdEqjjwDwRu2kj9pj35hSSjeV5zH1fimNdzuB/owyoc+R9WlR+Og6W8Wh9HJsf8uY4KRRJo0mFozjlI9DFGY6MV9WW3NGsUsAK9BapkXkFt9lNfOq8dHS1P2HaRkikIXzdtdWbt445uf1Jo/prQyxZ7d4lMQ8ZLSIKM2SuWY1RDitRVHxOvroQdOECbMvvJ+Kv4PpNuIJ/GJZAwbv+SfoL5VWG1XU/W4jKKVnvoDU0lCPTydeeQnlAhS/iWmtj+isV2UNa1FKf0KQA5TonM/890kB8vUpZVLWg/Xu2ZZw874sY54JPwMLr+L4EEYdTYumjMi8jC9KS04ftT0i9YSx7wIRzWThRzSGr8KixeJ6mn3P5+m9eIDNPouV82gCOAh+YiSX40oKhGZPqVoKTuAvOS5uFs9PsoTV1ZpLOAk=
